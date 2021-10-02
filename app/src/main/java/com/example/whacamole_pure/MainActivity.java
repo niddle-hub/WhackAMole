@@ -2,13 +2,10 @@ package com.example.whacamole_pure;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.media.Image;
-import android.view.View;
-import android.widget.Button;
+import android.os.Bundle;
 import android.widget.ImageButton;
 import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
-import android.os.Bundle;
 
 public class MainActivity extends AppCompatActivity {
 

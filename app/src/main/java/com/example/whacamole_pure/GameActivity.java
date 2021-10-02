@@ -3,14 +3,14 @@ package com.example.whacamole_pure;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.graphics.drawable.GradientDrawable;
+import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.util.TypedValue;
 import android.view.Gravity;
 import android.widget.LinearLayout;
-import android.os.Bundle;
 import android.widget.TableRow;
 import android.widget.TextView;
+import androidx.appcompat.app.AlertDialog;
 
 import java.util.concurrent.atomic.AtomicInteger;
 
@@ -19,6 +19,9 @@ public class GameActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        int gameDuration = 30000; //in milliseconds
+        int timeToCatchMole = 800; //in milliseconds
 
         /*Root layout filed*/
         LinearLayout root = new LinearLayout(this);
@@ -70,14 +73,14 @@ public class GameActivity extends Activity {
         textRow.addView(timerText);
         root.addView(textRow);
 
-        HoleGrid holeGrid = new HoleGrid(this, 3,3);
+        HoleGrid holeGrid = new HoleGrid(this, 3, 3);
         Mole mole = new Mole(this);
 
         AtomicInteger currentScore = new AtomicInteger(-1);
-        AtomicInteger currentTime = new AtomicInteger(31);
+        AtomicInteger currentTime = new AtomicInteger(gameDuration / 1000 + 1);
 
         mole.setOnClickListener(v -> {
-            currentScore.getAndIncrement();
+            currentScore.incrementAndGet();
             scoreText.setText(String.valueOf(currentScore));
         });
 
@@ -87,7 +90,7 @@ public class GameActivity extends Activity {
         SharedPreferences prefs = getSharedPreferences("PlayerPrefs", MODE_PRIVATE);
         int loadedScore = prefs.getInt("score", 0);
 
-        new CountDownTimer(30000, 500) {
+        new CountDownTimer(gameDuration, timeToCatchMole) {
 
             @Override
             public void onTick(long millisUntilFinished) {
@@ -96,17 +99,20 @@ public class GameActivity extends Activity {
 
             @Override
             public void onFinish() {
-                if (loadedScore < currentScore.intValue()) {
+                if (loadedScore < currentScore.get()) {
                     editor.putInt("score", currentScore.intValue());
                     editor.apply();
                 }
-                Intent intent = new Intent(GameActivity.this, MainActivity.class);
-                startActivity(intent);
+                AlertDialog.Builder builder = new AlertDialog.Builder(GameActivity.this, R.style.Theme_AppCompat);
+                builder.setTitle("Конец игры")
+                        .setMessage("Вы набрали: " + currentScore.get() + " Ваш лучший счёт: " + loadedScore + " Хотите продолжить ?")
+                        .setPositiveButton("Начать заново", (dialog, id) -> recreate())
+                        .setNegativeButton("Выйти в меню", (dialog, id) -> startMainActivity());
+                builder.create().show();
             }
-
         }.start();
 
-        new CountDownTimer(30000, 1000) {
+        new CountDownTimer(gameDuration, 1000) {
 
             @Override
             public void onTick(long millisUntilFinished) {
@@ -119,4 +125,11 @@ public class GameActivity extends Activity {
             }
         }.start();
     }
+
+    private void startMainActivity() {
+        Intent intent = new Intent(GameActivity.this, MainActivity.class);
+        finish();
+        startActivity(intent);
+    }
+
 }

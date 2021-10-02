@@ -1,15 +1,7 @@
 package com.example.whacamole_pure;
 
 import android.content.Context;
-import android.view.Gravity;
-import android.view.ViewGroup;
 import android.widget.FrameLayout;
-import android.widget.GridLayout;
-import android.widget.ImageView;
-import android.widget.Toolbar;
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import android.os.Bundle;
 
 public class Hole extends androidx.appcompat.widget.AppCompatImageView {
 

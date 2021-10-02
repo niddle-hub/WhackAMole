@@ -4,7 +4,6 @@ import android.content.Context;
 import android.view.Gravity;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
-import android.widget.LinearLayout;
 
 public class Mole extends androidx.appcompat.widget.AppCompatImageView {
 
