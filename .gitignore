@@ -1,0 +1,30 @@
+# Android format files
+*.apk
+*.ap_
+
+# Android test directories
+**/test
+**/androidTest
+
+# Java class files
+*.class
+
+# IntelliJ IDEA files
+*.iml
+.idea
+**/build
+/captures
+
+# Gradle files
+.gradle
+/gradle
+*.gradle
+gradle.properties
+gradlew
+gradlew.bat
+
+# Local configuration
+local.properties
+
+# Git directory
+.git
