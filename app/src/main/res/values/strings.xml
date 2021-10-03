@@ -1,3 +1,6 @@
 <resources>
-    <string name="app_name">WhacAMole_Pure</string>
+    <string name="app_name">WhacAMole</string>
+    <string name="game_description">a game in an amusement arcade in which players use a finger to hit virtual moles,
+        which appear at random, back into their holes.
+    </string>
 </resources>

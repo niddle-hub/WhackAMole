@@ -1,16 +1,20 @@
 package com.example.whacamole_pure;
 
 import android.content.Context;
+import android.util.Log;
 import android.widget.FrameLayout;
 import android.widget.GridLayout;
 import android.widget.LinearLayout;
 
+import java.io.Console;
+import java.util.ArrayList;
 import java.util.Random;
 
 public class HoleGrid extends GridLayout {
 
     private final int holeCount;
-
+    private final ArrayList<FrameLayout> places = new ArrayList<>();
+    private FrameLayout lastReturnedPlace = null;
 
     public HoleGrid(Context context) {
         super(context);
@@ -22,11 +26,11 @@ public class HoleGrid extends GridLayout {
         setColumnCount(columns);
         setRowCount(rows);
         setParams();
-        holeCount = getColumnCount() * getRowCount();
+        holeCount = columns * rows;
         fillGrid();
     }
 
-    private FrameLayout createInsideLayout() {
+    private FrameLayout createLayoutContainer() {
         FrameLayout frameLayout = new FrameLayout(getContext());
         GridLayout.LayoutParams layoutParams = new GridLayout.LayoutParams();
         layoutParams.rowSpec = GridLayout.spec(GridLayout.UNDEFINED, 1f);
@@ -45,19 +49,26 @@ public class HoleGrid extends GridLayout {
     }
 
     private void fillGrid() {
-        for (int i = 0; i < holeCount; i++) {
-            Hole hole = new Hole(getContext());
-            FrameLayout insideLayout = createInsideLayout();
-            insideLayout.addView(hole);
-            addView(insideLayout);
+        if (holeCount > 1) {
+            for (int i = 0; i < holeCount; i++) {
+                Hole hole = new Hole(getContext());
+                FrameLayout container = createLayoutContainer();
+                places.add(container);
+                container.addView(hole);
+                addView(container);
+            }
         }
     }
 
-    public FrameLayout getRandomHole() {
-        if (holeCount > 0) {
-            return (FrameLayout) getChildAt(new Random().nextInt(holeCount));
+    public FrameLayout pickANewRandomPlace() {
+        if (holeCount > 1) {
+            FrameLayout currentPlace;
+            do {
+                currentPlace = places.get(new Random().nextInt(places.size()));
+            } while (currentPlace == lastReturnedPlace);
+            lastReturnedPlace = currentPlace;
+            return currentPlace;
         }
         return null;
     }
-
 }

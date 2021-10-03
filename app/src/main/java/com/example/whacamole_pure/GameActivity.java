@@ -22,7 +22,7 @@ public class GameActivity extends Activity {
         super.onCreate(savedInstanceState);
 
         int gameDuration = 30000; //in milliseconds
-        int timeToCatchAMole = 800; //in milliseconds
+        int timeToCatchAMole = 500; //in milliseconds
 
         /*Root layout filed*/
         LinearLayout root = new LinearLayout(this);

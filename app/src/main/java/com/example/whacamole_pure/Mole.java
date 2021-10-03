@@ -25,10 +25,13 @@ public class Mole extends androidx.appcompat.widget.AppCompatImageView {
     }
 
     public void beginPopUp(HoleGrid holeGrid) {
-        FrameLayout currentHolePlace = holeGrid.getRandomHole();
+        FrameLayout currentHolePlace = holeGrid.pickANewRandomPlace();
         if (currentHolePlace != null) {
             if(getParent() != null) {
                 ((ViewGroup) getParent()).removeView(this);
+            }
+            if (currentHolePlace.getChildAt(this.getId()) != null) {
+                currentHolePlace.removeView(this);
             }
             currentHolePlace.addView(this);
         }
