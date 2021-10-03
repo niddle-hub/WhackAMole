@@ -11,6 +11,7 @@ import android.widget.LinearLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
 import androidx.appcompat.app.AlertDialog;
+import androidx.core.content.ContextCompat;
 
 import java.util.concurrent.atomic.AtomicInteger;
 
@@ -21,7 +22,7 @@ public class GameActivity extends Activity {
         super.onCreate(savedInstanceState);
 
         int gameDuration = 30000; //in milliseconds
-        int timeToCatchMole = 800; //in milliseconds
+        int timeToCatchAMole = 800; //in milliseconds
 
         /*Root layout filed*/
         LinearLayout root = new LinearLayout(this);
@@ -29,6 +30,7 @@ public class GameActivity extends Activity {
                 LinearLayout.LayoutParams.MATCH_PARENT,
                 LinearLayout.LayoutParams.MATCH_PARENT
         ));
+        root.setBackgroundColor(ContextCompat.getColor(this, R.color.ground));
         root.setOrientation(LinearLayout.VERTICAL);
         /*End root layout filed*/
 
@@ -90,7 +92,7 @@ public class GameActivity extends Activity {
         SharedPreferences prefs = getSharedPreferences("PlayerPrefs", MODE_PRIVATE);
         int loadedScore = prefs.getInt("score", 0);
 
-        new CountDownTimer(gameDuration, timeToCatchMole) {
+        new CountDownTimer(gameDuration, timeToCatchAMole) {
 
             @Override
             public void onTick(long millisUntilFinished) {
