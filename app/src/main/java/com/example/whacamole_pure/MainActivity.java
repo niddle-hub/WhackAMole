@@ -3,6 +3,7 @@ package com.example.whacamole_pure;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
@@ -18,6 +19,12 @@ public class MainActivity extends AppCompatActivity {
         playButton.setOnClickListener(view -> {
             Intent gameIntent = new Intent(this, GameActivity.class);
             startActivity(gameIntent);
+        });
+
+        Button settingsButton = findViewById(R.id.settingsButton);
+        settingsButton.setOnClickListener(v -> {
+            Intent settingsIntent = new Intent(this, GameSettings.class);
+            startActivity(settingsIntent);
         });
 
         SharedPreferences prefs = getSharedPreferences("PlayerPrefs", MODE_PRIVATE);

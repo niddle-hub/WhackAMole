@@ -1,12 +1,10 @@
 package com.example.whacamole_pure;
 
 import android.content.Context;
-import android.util.Log;
 import android.widget.FrameLayout;
 import android.widget.GridLayout;
 import android.widget.LinearLayout;
 
-import java.io.Console;
 import java.util.ArrayList;
 import java.util.Random;
 

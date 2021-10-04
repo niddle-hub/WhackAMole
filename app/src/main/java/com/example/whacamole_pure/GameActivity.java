@@ -24,6 +24,9 @@ public class GameActivity extends Activity {
         int gameDuration = 30000; //in milliseconds
         int timeToCatchAMole = 500; //in milliseconds
 
+        SharedPreferences.Editor editor = getSharedPreferences("PlayerPrefs", MODE_PRIVATE).edit();
+        SharedPreferences prefs = getSharedPreferences("PlayerPrefs", MODE_PRIVATE);
+
         /*Root layout filed*/
         LinearLayout root = new LinearLayout(this);
         root.setLayoutParams(new LinearLayout.LayoutParams(
@@ -75,7 +78,10 @@ public class GameActivity extends Activity {
         textRow.addView(timerText);
         root.addView(textRow);
 
-        HoleGrid holeGrid = new HoleGrid(this, 3, 3);
+        int columns = prefs.getInt("grid_x", 3);
+        int rows = prefs.getInt("grid_y", 3);
+
+        HoleGrid holeGrid = new HoleGrid(this, columns, rows);
         Mole mole = new Mole(this);
 
         AtomicInteger currentScore = new AtomicInteger(-1);
@@ -88,8 +94,6 @@ public class GameActivity extends Activity {
 
         root.addView(holeGrid);
 
-        SharedPreferences.Editor editor = getSharedPreferences("PlayerPrefs", MODE_PRIVATE).edit();
-        SharedPreferences prefs = getSharedPreferences("PlayerPrefs", MODE_PRIVATE);
         int loadedScore = prefs.getInt("score", 0);
 
         new CountDownTimer(gameDuration, timeToCatchAMole) {

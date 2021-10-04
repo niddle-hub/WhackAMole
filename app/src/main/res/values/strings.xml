@@ -3,4 +3,10 @@
     <string name="game_description">a game in an amusement arcade in which players use a finger to hit virtual moles,
         which appear at random, back into their holes.
     </string>
+    <string name="grid_x_size_label">X</string>
+    <string name="grid_y_size_label">Y</string>
+    <string name="grid_size_label">Grid size:</string>
+    <string name="game_settings_header_label">Game settings</string>
+    <string name="button_save_label">Save</string>
+    <string name="game_settings_button_text">Game settings</string>
 </resources>

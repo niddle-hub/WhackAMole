@@ -40,6 +40,15 @@
             tools:ignore="HardcodedText"
             android:layout_centerInParent="true"/>
 
+    <Button
+            android:clickable="true"
+            android:layout_marginTop="10dp"
+            android:text="@string/game_settings_button_text"
+            android:layout_centerHorizontal="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/settingsButton"
+            android:layout_below="@+id/playButton"/>
     <TextView
             android:layout_marginBottom="100dp"
             android:layout_alignParentBottom="true"
